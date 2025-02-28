@@ -34,7 +34,7 @@ jobs:
         uses: actions/jekyll-build-pages@v1
         with:
           source: ./
-          destination: ./index.html
+          destination: ./_site
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
 
@@ -42,7 +42,7 @@ jobs:
   deploy: 
     environment:
       name: github-pages
-      url: https://pspencer89.github.io/{Pspencer89}/index.html
+      url: https://pspencer89.github.io/{Pspencer89}/
     runs-on: ubuntu-latest
     needs: build
     steps:
