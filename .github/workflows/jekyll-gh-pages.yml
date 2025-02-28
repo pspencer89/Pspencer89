@@ -39,7 +39,7 @@ jobs:
         uses: actions/upload-pages-artifact@v3
 
   # Deployment job
-  deploy: https://pspencer89.github.io/Pspencer89/
+  deploy: 
     environment:
       name: github-pages
       url: https://pspencer89.github.io/{Pspencer89}/index.html
