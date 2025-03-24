@@ -1,16 +1,16 @@
 #!/bin/bash
 
 #Pull out IPv4 addresses from the authentication log, count each time, and save to a file
-sudo grep -oE "([0-9]{1,3}\.){3}[0-9]{1,3}" /var/log/auth.log | sort -n | uniq -c | sort -nr > IP4_adds.txt
+sudo grep -a -oE "([0-9]{1,3}\.){3}[0-9]{1,3}" /var/log/auth.log | sort -n | uniq -c | sort -nr > IP4_adds.txt
 
 #Get IPv6 addresses from the authentication log, count each time, and save to a file
-sudo grep -oE "([0-9a-fA-F]{0,4}:){1,7}[0-9a-fA-F]{0,4}" /var/log/auth.log | sort -n | uniq -c | sort -nr > IP6_adds.txt
+sudo grep -a -oE "([0-9a-fA-F]{0,4}:){1,7}[0-9a-fA-F]{0,4}" /var/log/auth.log | sort -n | uniq -c | sort -nr > IP6_adds.txt
 
 #Search for failed or successful login attempts in the authentication log and save to a file
 sudo grep -E "(failed|successful) login" /var/log/auth.log > login_attempts.txt
 
 #SSH into a remote server(put any user and server where patrick@ is) and search for errors in the system log, save to a file
-sudo ssh patrick@192.168.0.68 'grep "error" /var/log/syslog' > remote_errors.txt
+ssh patrick@192.168.0.68 'journalctl -p err' > remote_errors.txt
 
 #Find files in /var/log changed in the last 10 days and their details, save to a file
 sudo find /var/log -type f -mtime 10 -exec ls -l {} \; > modified_files.txt
