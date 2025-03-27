@@ -1,12 +1,12 @@
 #!/bin/bash
 
-#Pull out IPv4 addresses from the authentication log, count each time, and save to a file
+#Pull out IPv4 addresses from auth.log, count each time, and save to a file
 sudo grep -a -oE "([0-9]{1,3}\.){3}[0-9]{1,3}" /var/log/auth.log | sort -n | uniq -c | sort -nr > IP4_adds.txt
 
-#Get IPv6 addresses from the authentication log, count each time, and save to a file
+#Get IPv6 addresses from auth.log, count each time, and save to a file
 sudo grep -a -oE "([0-9a-fA-F]{0,4}:){1,7}[0-9a-fA-F]{0,4}" /var/log/auth.log | sort -n | uniq -c | sort -nr > IP6_adds.txt
 
-#Search for failed or successful login attempts in the authentication log and save to a file
+#Search for failed or successful login attempts in auth.log and save to a file
 sudo grep -E "(failed|successful) login" /var/log/auth.log > login_attempts.txt
 
 #SSH into a remote server(put any user and server where patrick@ is) and search for errors in the system log, save to a file
